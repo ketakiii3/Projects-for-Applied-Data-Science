@@ -19,7 +19,7 @@ An R Shiny dashboard for data loading, preprocessing, feature engineering, and e
 * **Goal**: Provide a clean, guided interface for end-to-end tabular data exploration — from upload through cleaning, transformation, and visualization.
 * **Tech Stack**: R, Shiny, ggplot2, readxl, jsonlite, DT, shinyWidgets.
 * **Key Features**: Supports CSV/Excel/JSON/RDS uploads, missing value imputation (mean/median/mode), outlier handling (IQR removal, Winsorization), feature scaling (Z-score, Min-Max), one-hot encoding, log/sqrt/binning transformations, and interactive EDA (histograms, scatterplots, boxplots, correlation matrices).
-* **Deployed App**: [TidyKit on shinyapps.io](LINK_HERE)
+* **Deployed App**: [TidyKit on shinyapps.io](https://kvd2112.shinyapps.io/tidykit/)
 
 ### 3. Project 3
 *Details coming soon.*
