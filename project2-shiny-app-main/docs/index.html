@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TidyKit - Interactive Data Analysis Dashboard</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Segoe UI', Arial, Helvetica, sans-serif;
+      background: linear-gradient(180deg, #eef6ff 0%, #dcecff 100%);
+      color: #12385f;
+      min-height: 100vh;
+    }
+
+    .banner {
+      background: #1F4E82;
+      color: white;
+      padding: 48px 32px 56px;
+      border-radius: 0 0 32px 32px;
+      box-shadow: 0 10px 28px rgba(31, 78, 130, 0.20);
+      text-align: center;
+    }
+
+    .banner h1 {
+      font-size: 52px;
+      font-weight: 800;
+      margin-bottom: 12px;
+    }
+
+    .banner p {
+      font-size: 18px;
+      opacity: 0.95;
+      max-width: 700px;
+      margin: 0 auto;
+      line-height: 1.7;
+    }
+
+    .banner .buttons {
+      margin-top: 28px;
+      display: flex;
+      gap: 16px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 14px 32px;
+      border-radius: 14px;
+      font-weight: 700;
+      font-size: 16px;
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #5fa7e8 0%, #7cbaf0 100%);
+      color: white;
+      box-shadow: 0 6px 18px rgba(83, 154, 220, 0.3);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 24px rgba(83, 154, 220, 0.4);
+    }
+
+    .btn-secondary {
+      background: rgba(255,255,255,0.15);
+      color: white;
+      border: 2px solid rgba(255,255,255,0.3);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255,255,255,0.25);
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    .section-title {
+      font-size: 28px;
+      font-weight: 800;
+      color: #163e68;
+      margin: 48px 0 24px;
+      text-align: center;
+    }
+
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 24px;
+      margin-bottom: 48px;
+    }
+
+    .feature-card {
+      background: linear-gradient(180deg, #ffffff 0%, #f5faff 100%);
+      border-radius: 24px;
+      padding: 28px 24px;
+      box-shadow: 0 10px 24px rgba(23, 67, 114, 0.08);
+      border: 1px solid #dbeeff;
+      transition: all 0.25s ease;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 16px 28px rgba(23, 67, 114, 0.13);
+    }
+
+    .feature-icon {
+      width: 56px;
+      height: 56px;
+      background: linear-gradient(135deg, #e0f0ff, #c8e2ff);
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+      margin-bottom: 16px;
+    }
+
+    .feature-card h3 {
+      font-size: 20px;
+      font-weight: 800;
+      color: #163f69;
+      margin-bottom: 10px;
+    }
+
+    .feature-card p {
+      font-size: 15px;
+      line-height: 1.7;
+      color: #4a6784;
+    }
+
+    .how-to {
+      background: white;
+      border-radius: 24px;
+      padding: 36px 32px;
+      box-shadow: 0 10px 26px rgba(22, 68, 116, 0.09);
+      border: 1px solid #e0efff;
+      margin-bottom: 48px;
+    }
+
+    .how-to h2 {
+      font-size: 24px;
+      font-weight: 800;
+      color: #123c67;
+      margin-bottom: 20px;
+    }
+
+    .how-to ol {
+      padding-left: 24px;
+    }
+
+    .how-to li {
+      font-size: 16px;
+      line-height: 1.8;
+      color: #355472;
+      margin-bottom: 8px;
+    }
+
+    .how-to code {
+      background: #eef5ff;
+      padding: 2px 8px;
+      border-radius: 6px;
+      font-size: 14px;
+      color: #1d5f9f;
+    }
+
+    .team {
+      margin-bottom: 60px;
+    }
+
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 20px;
+    }
+
+    .team-card {
+      background: white;
+      border-radius: 18px;
+      padding: 24px 20px;
+      box-shadow: 0 6px 18px rgba(22, 68, 116, 0.07);
+      border: 1px solid #e0efff;
+      text-align: center;
+    }
+
+    .team-card .role {
+      font-size: 13px;
+      font-weight: 700;
+      color: #2E69A8;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 8px;
+    }
+
+    .team-card .desc {
+      font-size: 14px;
+      line-height: 1.6;
+      color: #4a6784;
+    }
+
+    .footer {
+      text-align: center;
+      padding: 32px 24px;
+      color: #7a9abc;
+      font-size: 14px;
+    }
+
+    @media (max-width: 600px) {
+      .banner h1 { font-size: 36px; }
+      .banner p { font-size: 16px; }
+      .features { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="banner">
+    <h1>TidyKit</h1>
+    <p>
+      A clean and interactive dashboard for data loading, preprocessing,
+      feature engineering, and exploratory analysis. Built with R Shiny.
+    </p>
+    <div class="buttons">
+      <a href="https://kvd2112.shinyapps.io/tidykit/" class="btn btn-primary">Try the App</a>
+      <a href="https://github.com/Aurooora712/project2-shiny-app" class="btn btn-secondary">View Source Code</a>
+    </div>
+  </header>
+
+  <div class="container">
+
+    <h2 class="section-title">Core Features</h2>
+
+    <div class="features">
+      <div class="feature-card">
+        <div class="feature-icon">&#x1F4C2;</div>
+        <h3>Data Loading</h3>
+        <p>
+          Import CSV, Excel, JSON, or RDS files. Two built-in sample datasets
+          (iris &amp; mtcars) are included for quick testing.
+        </p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">&#x1F9F9;</div>
+        <h3>Data Cleaning</h3>
+        <p>
+          Handle duplicates, missing values, outliers, scaling, and categorical
+          encoding through an interactive interface with real-time feedback.
+        </p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">&#x1F527;</div>
+        <h3>Feature Engineering</h3>
+        <p>
+          Create transformed variables (log, square root, square, binning) with
+          side-by-side visual comparison of original vs. transformed distributions.
+        </p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">&#x1F4CA;</div>
+        <h3>Exploratory Data Analysis</h3>
+        <p>
+          Interactive histograms, scatterplots, and boxplots. Dynamic summary
+          statistics and correlation matrix. Optional linear regression overlay.
+        </p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">&#x1F4D6;</div>
+        <h3>User Guide</h3>
+        <p>
+          A built-in guided workflow helps users understand each step of the
+          data analysis pipeline, from loading to visualization.
+        </p>
+      </div>
+
+      <div class="feature-card">
+        <div class="feature-icon">&#x26A1;</div>
+        <h3>Responsive &amp; Interactive</h3>
+        <p>
+          Polished UI with smooth navigation, dynamic controls, and instant
+          visual feedback on every user action.
+        </p>
+      </div>
+    </div>
+
+    <div class="how-to">
+      <h2>How to Run Locally</h2>
+      <ol>
+        <li>Clone the repository: <code>git clone https://github.com/Aurooora712/project2-shiny-app.git</code></li>
+        <li>Open R or RStudio in the project directory</li>
+        <li>Install dependencies:
+          <code>install.packages(c("shiny", "ggplot2", "readxl", "jsonlite", "DT", "shinyWidgets", "fontawesome"))</code>
+        </li>
+        <li>Run the app: <code>shiny::runApp()</code></li>
+      </ol>
+    </div>
+
+    <h2 class="section-title">Team Contributions</h2>
+
+    <div class="team">
+      <div class="team-grid">
+        <div class="team-card">
+          <div class="role">Qixiang Fan (qf2188)</div>
+          <div class="desc">Core analytical modules: data loading, cleaning, feature engineering, and EDA</div>
+        </div>
+        <div class="team-card">
+          <div class="role">Jingyang Zhang (jz3985)</div>
+          <div class="desc">UI/UX design, layout, navigation, tooltips, and user guide</div>
+        </div>
+        <div class="team-card">
+          <div class="role">Pingyu Zhou (pz2341)</div>
+          <div class="desc">App integration, reactivity, responsiveness, debugging, and testing</div>
+        </div>
+        <div class="team-card">
+          <div class="role">Ketaki Dabade (kvd2112)</div>
+          <div class="desc">Deployment, GitHub/README, code organization, and final report</div>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <footer class="footer">
+    Columbia University STAT 5243 &mdash; Spring 2026
+  </footer>
+
+</body>
+</html>
